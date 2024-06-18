@@ -37,9 +37,15 @@ test:
     - pytest
 
 about:
-  home: https://github.com/datamade/simplecosine
+  home: https://github.com/dedupeio/simplecosine
+  dev_url: https://github.com/dedupeio/simplecosine
+  doc_url: https://github.com/dedupeio/simplecosine/blob/master/README.md
   summary: Simple cosine distance
+  description: |
+    Part of the Dedupe.io cloud service and open source toolset for 
+    de-duplicating and finding fuzzy matches in your data.
   license: MIT
+  license_family: MIT
   license_file: LICENSE
 
 extra:
