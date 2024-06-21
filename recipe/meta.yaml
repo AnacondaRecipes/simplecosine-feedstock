@@ -1,40 +1,51 @@
 {% set name = "simplecosine" %}
 {% set version = "1.2" %}
 
-
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/simplecosine-{{ version }}.tar.gz
-  sha256: 216ae262f5e5d2daaa7740296f9308c9fc024e7d7551412c7839065748b3bf02
+  url: https://github.com/dedupeio/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 09d2d356ecf5bbaae249f26b30b3128a56899dd6f0d34fbf7ff779a7cd2cd15e
 
 build:
   number: 0
-  noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
+  skip: true  # [py<36]
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python
+    - setuptools
+    - wheel
   run:
     - numpy
-    - python >=3.6
+    - python
 
 test:
+  source_files:
+    - tests
   imports:
     - simplecosine.cosine
   commands:
     - pip check
+    - pytest tests -v
   requires:
     - pip
+    - pytest
 
 about:
-  home: https://github.com/datamade/simplecosine
+  home: https://github.com/dedupeio/simplecosine
+  dev_url: https://github.com/dedupeio/simplecosine
+  doc_url: https://github.com/dedupeio/simplecosine/blob/master/README.md
   summary: Simple cosine distance
+  description: |
+    Part of the Dedupe.io cloud service and open source toolset for 
+    de-duplicating and finding fuzzy matches in your data.
   license: MIT
+  license_family: MIT
   license_file: LICENSE
 
 extra:
